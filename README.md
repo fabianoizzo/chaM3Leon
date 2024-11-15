@@ -2,62 +2,62 @@
 
 A modular and scalable framework designed to support machine learning applications - emphasising transparency, interoperability, and usability. It implements a custom lambda architecture, and additional components designed to tackle the limitation of the Speed-Batch coupling for data ingestion and processing.
 
-
-
 To implement your own version of any abstract layer you have to:
 
+- Build the project running at the level of the chaM3Leon pom.xml the following command:
+```bash
+mvn clean install
+```
 - Generate a Maven project and add chaM3Leon as dependency on your maven pom.xml as below: 
 
 ```bash
-		<dependency>
-			<groupId>com.smartshaped</groupId>
-			<artifactId>chameleon</artifactId>
-			<version>0.1.1</version>
-		</dependency>
+<dependency>
+	<groupId>com.smartshaped</groupId>
+	<artifactId>chameleon</artifactId>
+	<version>0.0.1</version>
+</dependency>
 ```
-
-- Add the maven-shade-plugin to generate a shaded jar in order to submit your layer implementation as a Spark application
+- Add the maven-shade-plugin to generate a shaded jar in order to submit your layer implementation as a Spark application (keep in mind the framework is based on Java 11)
 
 ```bash
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<version>3.6.0</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-						<configuration>
-							<filters>
-								<filter>
-									<artifact>*:*</artifact>
-									<excludes>
-										<exclude>META-INF/*.SF</exclude>
-										<exclude>META-INF/*.DSA</exclude>
-										<exclude>META-INF/*.RSA</exclude>
-									</excludes>
-								</filter>
-							</filters>
-							<transformers>
-						        <transformer
-						             implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
-						             <resource>
-						                   META-INF/services/org.apache.spark.sql.sources.DataSourceRegister
-						             </resource>
-						        </transformer>
-						   </transformers>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+<build>
+	<plugins>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-shade-plugin</artifactId>
+			<version>3.6.0</version>
+			<executions>
+				<execution>
+					<phase>package</phase>
+					<goals>
+						<goal>shade</goal>
+					</goals>
+					<configuration>
+						<filters>
+							<filter>
+								<artifact>*:*</artifact>
+								<excludes>
+									<exclude>META-INF/*.SF</exclude>
+									<exclude>META-INF/*.DSA</exclude>
+									<exclude>META-INF/*.RSA</exclude>
+								</excludes>
+							</filter>
+						</filters>
+						<transformers>
+							<transformer
+									implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+									<resource>
+										META-INF/services/org.apache.spark.sql.sources.DataSourceRegister
+									</resource>
+							</transformer>
+						</transformers>
+					</configuration>
+				</execution>
+			</executions>
+		</plugin>
+	</plugins>
+</build>
 ```
-
 
 After this, you can choose to extend any of the following layers:
 
