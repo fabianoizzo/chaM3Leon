@@ -1,21 +1,55 @@
+HELP.md
 target/
-pom.xml.tag
-pom.xml.releaseBackup
-pom.xml.versionsBackup
-pom.xml.next
-release.properties
-dependency-reduced-pom.xml
-buildNumber.properties
-.mvn/timing.properties
-# https://github.com/takari/maven-wrapper#usage-without-binary-jar
-.mvn/wrapper/maven-wrapper.jar
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
 
-# Eclipse m2e generated files
-# Eclipse Core
+dependency-reduced-pom.xml
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
 .project
 .settings
-# JDT-specific (Eclipse Java Development Tools)
-.classpath
+.springBeans
+.sts4-cache
 
-# Idea
+### IntelliJ IDEA ###
 .idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+/.metadata/
+/.sonarlint/
+/docker_sp_had/hadoop
+/docker_sp_had/spark_jars
+
+### notebooks ###
+/docker_notebook_test/sedona_scripts/data/
+/docker_notebook_test/sedona_scripts/.ipynb_checkpoints/
+/docker_notebook_test/sedona_scripts/tif_study/.ipynb_checkpoints/
+/docker_notebook_test/sedona_scripts/json_study/.ipynb_checkpoints/
+/docker_notebook_test/sedona_scripts/ML/.ipynb_checkpoints/
+
+/docker_sp_had/kafka-windows-docker-data
+
+## jars
+/docker_sp_had/jars/
+
+## cassandra workbench
+.cassandraWorkbench.jsonc
+/.cassandraWorkbench
