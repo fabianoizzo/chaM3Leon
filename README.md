@@ -65,7 +65,6 @@ After this, you can choose to extend any of the following layers:
 - [Speed Layer](#speed-layer-documentation)
 - [ML Layer](#ml-layer-documentation)
 
-
 # Batch Layer Documentation
 
 ## How to Develop a Batch Application
@@ -162,13 +161,12 @@ To develop a machine learning application using the ML Layer, follow these steps
 
 ---
 
-You can generate your .jar running the `mvn clean install` command inside your project folder
+# Execution Instructions
 
-## Example `spark-submit` Command
+To generate the `.jar` file, run the following command from your project directory:
 
 ```bash
-spark-submit \
-  --class <your.main.class> \
-  --master <spark.master.url> \
-  --deploy-mode <client|cluster> \
-  <path-to-your-jar>
+mvn clean install
+```
+
+Then, follow the [Docker documentation](/docker_chaM3Leon/README.md)
