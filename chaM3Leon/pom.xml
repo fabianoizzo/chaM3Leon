@@ -4,14 +4,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.smartshaped</groupId>
 	<artifactId>chameleon</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.1</version>
 	<name>chameleon</name>
 	<description>Chameleon Framework</description>
 
 	<properties>
         <java.version>11</java.version>
         <spark-version>3.5.1</spark-version>
-        <lombok-version>1.18.26</lombok-version>
+        <lombok-version>1.18.36</lombok-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>11</maven.compiler.source>
