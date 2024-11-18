@@ -1,14 +1,14 @@
 # chaM3Leon
 
-A modular and scalable framework designed to support machine learning applications - emphasising transparency, interoperability, and usability. It implements a custom lambda architecture, and additional components designed to tackle the limitation of the Speed-Batch coupling for data ingestion and processing.
+ChaM3Leon is a modular and scalable framework designed to support machine learning applications - emphasising transparency, interoperability, and usability. It implements a custom lambda architecture, and additional components designed to tackle the limitation of the Speed-Batch coupling for data ingestion and processing.
 
-To implement your own version of any abstract layer you have to:
+Being a framework, its layers are abstractions that need to be implemented. To implement your own version of any abstract layer you have to:
 
 - Build the project running at the level of the chaM3Leon pom.xml the following command:
 ```bash
 mvn clean install
 ```
-- Generate a Maven project and add chaM3Leon as dependency on your maven pom.xml as below: 
+- Generate a Maven project and add chaM3Leon as dependency on your maven pom.xml: 
 
 ```bash
 <dependency>
@@ -17,7 +17,7 @@ mvn clean install
 	<version>0.0.1</version>
 </dependency>
 ```
-- Add the maven-shade-plugin to generate a shaded jar in order to submit your layer implementation as a Spark application (keep in mind the framework is based on Java 11)
+- Add the maven-shade-plugin to generate a shaded jar, in order to submit your layer implementation as a Spark application (keep in mind the framework is based on Java 11):
 
 ```bash
 <build>
@@ -59,7 +59,7 @@ mvn clean install
 </build>
 ```
 
-After this, you can choose to extend any of the following layers:
+After this process has been completed, you can choose to extend any of the following layers:
 
 - [Batch Layer](#batch-layer-documentation)
 - [Speed Layer](#speed-layer-documentation)
@@ -69,22 +69,21 @@ After this, you can choose to extend any of the following layers:
 
 ## How to Develop a Batch Application
 
-To develop a batch application using the Batch Layer, follow these steps:
+To develop a batch application using the Batch Layer:
 
 ### 1. Create a Class that Extends `com.smartshaped.chameleon.batch.BatchLayer`
-- Ensure that the class constructor is **public**.
+- Make sure that the class constructor is **public**.
 
 ### 2. Create one or more Classes that Extend `com.smartshaped.chameleon.preprocessing.Preprocessor`
 - Declare this class in the YAML file along with the kafka topics configurations (batch.kafka.topics.<topic_name>.class).
-- Override the `preprocess` method to add custom preprocessing for the incoming streaming data.
+- Override the `preprocess` method to add custom preprocessing for the incoming data streaming.
 - You can define a Preprocessor for each of the declared kafka topics.
 
-### 3. Create a Class that Extends `com.smartshaped.chameleon.batch.BatchUpdater`
-- Ensure that the class constructor is **public**.
-- This is an optional step, create this class if you want to export some analysis/statisctics from your data.
+### 3. (OPTIONAL, only if you want to export custom metrics) Create a Class that Extends `com.smartshaped.chameleon.batch.BatchUpdater`
+- Make sure that the class constructor is **public**.
 - Declare this class in the YAML file (batch.updater.class).
 - Override the `updateBatch` method to implement the specific logic (working on Spark Dataframe).
-- It will automatically save results on Cassandra DB.
+- Results will be automatically saved on Cassandra DB.
 
 ### 5. Create a Class that Extends `com.smartshaped.chameleon.common.utils.TableModel`
 - Define the table fields as class attributes.
@@ -102,17 +101,17 @@ To develop a batch application using the Batch Layer, follow these steps:
 
 ## How to Develop a Speed Application
 
-To develop a batch application using the Speed Layer, follow these steps:
+To develop a batch application using the Speed Layer:
 
 ### 1. Create a Class that Extends `com.smartshaped.chameleon.speed.SpeedLayer`
-- Ensure that the class constructor is **public**.
+- Make sure that the class constructor is **public**.
 
 ### 3. Create a Class that Extends `com.smartshaped.chameleon.speed.SpeedUpdater`
-- Ensure that the class constructor is **public**.
-- This class permits you to export some partial analysis/statisctics from your streaming data arrived during a window time.
+- Make sure that the class constructor is **public**.
+- This class allows you to export partial analyses/statistics from your window-time streaming data.
 - Declare this class in the YAML file (speed.updater.class).
 - Override the `updateSpeed` method to implement the specific logic (working on Spark Dataframe).
-- It will automatically save results on Cassandra DB.
+- Results will be automatically saved on Cassandra DB.
 
 ### 5. Create a Class that Extends `com.smartshaped.chameleon.common.utils.TableModel`
 - Define the table fields as class attributes.
@@ -130,23 +129,23 @@ To develop a batch application using the Speed Layer, follow these steps:
 
 ## How to Develop an ML Application
 
-To develop a machine learning application using the ML Layer, follow these steps:
+To develop a machine learning application using the ML Layer:
 
 ### 1. Create a Class that Extends `com.smartshaped.chameleon.ml.MLLayer`
-- Ensure that the class constructor is **public**.
+- Make sure that the class constructor is **public**.
 
 ### 2. Create at Least One Class that Extends `com.smartshaped.chameleon.ml.HdfsReader`
-- Ensure that the class constructor is **public**.
-- Declare this class in the YAML file along with the HDFS path from which the data will be read.
+- Make sure that the class constructor is **public**.
+- Declare this class in the YAML file, along with the HDFS path from which the data will be read.
 - Optionally, override the `processRawData` method to add custom processing for the raw data.
 
 ### 3. Create a Class that Extends `com.smartshaped.chameleon.ml.Pipeline`
 - Declare this class in the YAML file.
 - Override the `start` method to implement the specific machine learning logic. 
-  - Ensure that the `setModel` and `setPredictions` methods are called at the end of the pipeline.
+- Make sure that the `setModel` and `setPredictions` methods are called at the end of the pipeline.
 
 ### 4. Create a Class that Extends `com.smartshaped.chameleon.ml.ModelSaver`
-- Ensure that the class constructor is **public**.
+- Make sure that the class constructor is **public**.
 - Declare this class in the YAML file.
 
 ### 5. Create a Class that Extends `com.smartshaped.chameleon.common.utils.TableModel`
