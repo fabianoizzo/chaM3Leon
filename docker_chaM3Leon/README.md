@@ -18,7 +18,7 @@
      docker-compose up
      ```
 
-5. **Insert Hadoop XML Configurations into Spark Master**  
+5. **Insert Hadoop's XML Configurations into Spark Master**  
    - Copy Hadoop configurations from the NameNode to your local directory:  
      ```bash
      docker cp docker_sp_had-namenode-1:/opt/hadoop/etc/hadoop/. ./hadoop
@@ -47,7 +47,7 @@
      hdfs dfs -chown -R spark:hadoop /spark
      hdfs dfs -chmod -R 777 /spark
      ```
-   - Temporarily, run the following (for testing purposes):  
+   - Run the following (for testing purposes):  
      ```bash
      hdfs dfs -chmod -R 777 /
      hdfs dfs -chown -R spark:hadoop /
@@ -74,7 +74,7 @@
       ```
 
 11. **View Logs for Cluster Mode Execution**  
-    - Use the following methods:  
+    - Do the following:  
       - Run:  
         ```bash
         yarn logs -applicationId <applicationId> -log_files_pattern stderr
