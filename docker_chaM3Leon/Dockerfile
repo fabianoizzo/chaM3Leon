@@ -10,10 +10,6 @@ COPY starter.sh /opt/starter.sh
 
 RUN chmod a+x /opt/starter.sh
 
-COPY entry-hdfs.sh /opt/hadoop/entry-hdfs.sh
-
-RUN chmod a+x /opt/hadoop/entry-hdfs.sh
-
 RUN id -u spark &>/dev/null || useradd spark -G hadoop
 
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
