@@ -322,6 +322,12 @@ CassandraUtils {
      */
     public void validateTableModel(TableModel tableModel) throws CassandraException {
 
+        try {
+            tableModel.validateModel();
+        } catch (ConfigurationException e) {
+            throw new CassandraException("Error while validating table model", e);
+        }
+
         if (!tableExists(tableModel.getTableName())) {
             logger.info("Table {} does not exist in keyspace {}", tableModel.getTableName(), keyspace);
 
@@ -345,7 +351,6 @@ CassandraUtils {
     private void createTable(TableModel tableModel) throws CassandraException {
 
         try {
-            tableModel.validateModel();
             String query = tableModel.getCreationQuery().replace("KEYSPACE", keyspace);
             executeQuery(query);
             logger.info("Table {} created successfully", tableModel.getTableName());
@@ -432,6 +437,8 @@ CassandraUtils {
         if (generateUuid) {
             df = df.withColumn("id", functions.expr("uuid()"));
         }
+
+        df.printSchema();
 
         try {
             df.writeStream().format("org.apache.spark.sql.cassandra")
