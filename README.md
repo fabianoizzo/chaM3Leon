@@ -2,6 +2,12 @@
 
 A modular and scalable framework designed to support machine learning applications - emphasising transparency, interoperability, and usability. It implements a custom lambda architecture, and additional components designed to tackle the limitation of the Speed-Batch coupling for data ingestion and processing.
 
+The chaM3Leon architecture is illustrated in the following Component Diagram, highlighting the connections between layers through provided and required interfaces.
+
+![chaM3Leon architecture](docs/chaM3LeonCD.png)
+
+As of now, we have released three layers (Batch Layer, Speed Layer, and ML Layer). You can refer to our [roadmap](#roadmap) to see the planned release dates for other components.
+
 To implement your own version of any abstract layer you have to:
 
 - Build the project running at the level of the chaM3Leon pom.xml the following command:
@@ -170,3 +176,15 @@ mvn clean install
 ```
 
 Then, follow the [Docker documentation](/docker_chaM3Leon/README.md)
+
+---
+
+# Roadmap
+
+- Harvester (JAN 2025)
+
+- API Gateway (MAR 2025)
+
+- Serving Layer (Q2 2025)
+
+- Workflow Designer (To be determined, probably Q3 2025)
